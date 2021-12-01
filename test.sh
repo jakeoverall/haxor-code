@@ -1,6 +1,6 @@
-#!/usr/env bash
+#!/usr/bin/env bash
 
-$OS = "$(uname)"
+$OS = "${uname}"
 
 if [["$OS" == "Linux"]]; then
   ifconfig
