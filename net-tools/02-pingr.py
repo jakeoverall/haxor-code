@@ -55,7 +55,9 @@ def print_menu():
     userchoice = input("What would you like to do? ")
 
     if options.get(userchoice):
-      options.get(userchoice)()
+      fn = options.get(userchoice)
+      if type(fn) is function:
+          fn()
       sleep(3)
       print_menu()
     else:
