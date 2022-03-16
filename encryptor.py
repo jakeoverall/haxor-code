@@ -32,7 +32,9 @@ What would you like to do
   2 - Decrypt File 
   3 - Encrypt Message 
   4 - Decrypt Message
-  5 - Quit
+  5 - Encrypt Directory
+  6 - Decrypt Directory
+  7 - Quit
 
   Please select a number: """)
 
@@ -59,6 +61,14 @@ What would you like to do
         message = input("Please provide your encrypted message: ")
         decrypt_message(message.encode())
     elif choice == '5':
+        print('Encrypt Directory')
+        dirname = input('Which Directory ')
+        encrypt_directory(dirname)
+    elif choice == '6':
+        print('Decrypt Directory')
+        dirname = input('Which Directory ')
+        decrypt_directory(dirname)
+    elif choice == '7':
         print('Fine Leave!!!')
         os.system('clear')
         exit(1)
@@ -66,22 +76,38 @@ What would you like to do
     os.system('clear')
     menu()
 
+
+def encrypt_directory(dirname):
+    for path, dirnames, files in os.walk(dirname):
+        for file in files:
+            filePath = os.path.join(path, file)
+            print(f'Encrypting File {filePath}')
+            encrypt_file(filePath)
+
+def decrypt_directory(dirname):
+    for path, dirnames, files in os.walk(dirname):
+        for file in files:
+            filePath = os.path.join(path, file)
+            print(f'Decrypting File {filePath}')
+            decrypt_file(filePath)
+
+
 def decrypt_file(filePath):
-    file = open(filePath, 'r')
+    file = open(f'{filePath}', 'rb')
     contents = file.read()
     file.close()
-    encrypted_message = decrypt_message(contents.encode())
-    file = open(filePath, 'w')
-    file.write(encrypted_message)
+    decrypted_message = decrypt_message(contents)
+    file = open(filePath, 'wb')
+    file.write(decrypted_message.encode())
     file.close()
 
 def encrypt_file(filePath):
-    file = open(filePath, 'r')
+    file = open(filePath, 'rb')
     contents = file.read()
     file.close()
-    encrypted_message = encrypt_message(contents.encode())
-    file = open(filePath, 'w')
-    file.write(encrypted_message)
+    encrypted_message = encrypt_message(contents)
+    file = open(f'{filePath}', 'wb')
+    file.write(encrypted_message.encode())
     file.close()
 
 # how do you know if the user choose encrypt or decrypt?
@@ -90,7 +116,7 @@ def encrypt_file(filePath):
 def countdown(seconds):
     while(seconds > 0):
         print(seconds) # /-|-\|
-        sleep(.2)
+        sleep(1)
         seconds -= 1
 
 def load_or_generate_key():
