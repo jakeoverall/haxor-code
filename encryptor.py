@@ -7,11 +7,12 @@ from os.path import exists
 from time import sleep
 
 import clipboard as pc
+import pyautogui
 from cryptography.fernet import Fernet
 
 
 def menu():
-    choice = input("""
+    choice = pyautogui.prompt("""
      .--------.
     / .------. \\
    / /        \\ \\
@@ -35,6 +36,7 @@ What would you like to do
   5 - Encrypt Directory
   6 - Decrypt Directory
   7 - Quit
+  8 - Crazy Mode
 
   Please select a number: """)
 
@@ -72,6 +74,16 @@ What would you like to do
         print('Fine Leave!!!')
         os.system('clear')
         exit(1)
+    elif choice == '8':
+        pyautogui.countdown(3)
+        pyautogui.moveTo(100,200, 3)
+        pyautogui.rightClick()
+        pyautogui.moveTo(100,250, 1)
+        pyautogui.sleep(2)
+        pyautogui.click()
+        pyautogui.write('All your base is belong to us', .3)
+        pyautogui.confirm('did you enjoy this display?')
+
     countdown(3)
     os.system('clear')
     menu()
