@@ -12,10 +12,11 @@ def load_password_list():
       passwords = f.read()
       return passwords
 
-passwords = load_password_list()
+passwords = [] # load_password_list()
 
 
 def check_password(passwordToBeChecked: str):
+    print(passwordToBeChecked)
     lowered = passwordToBeChecked.lower()
     if passwords and lowered in passwords:
       print('--- checking password in passlist ---')

@@ -18,6 +18,7 @@ def main():
 Please Select an option
 
 1 - Check Password
+2 - SSH Brute Login
 Q - Quit
 """)
   choice = input("> ")
