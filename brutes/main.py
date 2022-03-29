@@ -1,11 +1,13 @@
 import os
 
 import password_checker
+import ssh_attacker
 
 # Creates the Menu the user interacts with
 
 options = {
   '1': password_checker.start,
+  '2': ssh_attacker.start,
   'q': quit,
   'Q': quit
 }
