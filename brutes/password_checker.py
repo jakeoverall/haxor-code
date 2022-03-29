@@ -2,21 +2,29 @@
 
 from time import sleep
 
+import pwnedpasswords
+
 
 def load_password_list():
-    f = open('./passlist', 'r')
-    passwords = f.read()
-    return passwords
-
+    useList = input("Use your own list? y/N")
+    if useList == 'y':
+      f = open(input('Choose Password List File: '), 'r')
+      passwords = f.read()
+      return passwords
 
 passwords = load_password_list()
 
 
 def check_password(passwordToBeChecked: str):
-    print('--- checking password ---')
-    print(passwordToBeChecked)
     lowered = passwordToBeChecked.lower()
-    if lowered in passwords:
+    if passwords and lowered in passwords:
+      print('--- checking password in passlist ---')
+      print("Password was found")
+      sleep(3)
+      return
+    print('---- Checking against PWNEDPASSWORDS DB ----')
+    found = pwnedpasswords.check(lowered)
+    if found:
         print('That is a known password DO NOT use it!!!')
     else:
         print('That is an unknown password')
