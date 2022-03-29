@@ -2,31 +2,32 @@
 
 from time import sleep
 
-passwords = [
-  'password',
-  'test',
-  '123'
-]
-# TODO swap this list out for loading a file of passwords
+
+def load_password_list():
+    f = open('./passlist', 'r')
+    passwords = f.read()
+    return passwords
 
 
-def check_password(passwordToBeChecked):
-  print('---checking password---')
-  print(passwordToBeChecked)
+passwords = load_password_list()
 
-  if passwordToBeChecked in passwords:
-    print('That is a known password DO NOT use it!!!')
-  else:
-    print('That is an unknown password')
 
-  sleep(3)
+def check_password(passwordToBeChecked: str):
+    print('--- checking password ---')
+    print(passwordToBeChecked)
+    lowered = passwordToBeChecked.lower()
+    if lowered in passwords:
+        print('That is a known password DO NOT use it!!!')
+    else:
+        print('That is an unknown password')
+
+    sleep(3)
 
 
 def start():
-  print("""
+    print("""
 TODO PASSWORD_CHECKER BANNER HERE
 """)
-  password = input('Password:')
-  check_password(password)
-  print("something else")
-
+    password = input('Password:')
+    check_password(password)
+    print("something else")
