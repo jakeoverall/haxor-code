@@ -1,3 +1,8 @@
+# ssh libraries 
+# os.system('standard way to connect to ssh')
+# python-nmap
+# paramiko
+
 def start():
     # TODO clear the screen and print an ssh banner 
     host = input("What is the Host? ")
