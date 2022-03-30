@@ -1,1 +1,2 @@
 pwnedpasswords
+paramiko
