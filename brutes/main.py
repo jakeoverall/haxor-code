@@ -2,6 +2,7 @@ import os
 
 import password_checker
 import ssh_attacker
+from colors import colors
 
 # Creates the Menu the user interacts with
 
@@ -12,14 +13,13 @@ options = {
   'Q': quit
 }
 
-1
 def main():
-  print("""
+  print(f"""
 Please Select an option
 
-1 - Check Password
-2 - SSH Brute Login
-Q - Quit
+{colors.GREEN}1 - Check Password
+{colors.BLUE}2 - SSH Brute Login
+{colors.FAIL}Q - Quit{colors.ENDC}
 """)
   choice = input("> ")
   if choice in options:
