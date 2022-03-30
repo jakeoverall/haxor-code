@@ -1,12 +1,7 @@
-# ssh libraries 
-# os.system('standard way to connect to ssh')
-# python-nmap
-# paramiko
 from socket import socket
 from time import sleep
 
 import paramiko
-import pwnedpasswords
 
 
 def start():
@@ -15,11 +10,10 @@ def start():
     username = input("What is the Username? ")
     print(host)
     f = open('./passlist', 'r')
-    passwords = f.read()
-    # 5 mins 
-    # python get file text by line
+    passwords = f.readlines()
+    # Python how do I remove the carriage return character from a string
     for password in passwords:
-      connected = attempt_to_login(host, username, password)
+      connected = attempt_to_login(host, username, password.rstrip())
       if connected:
         sleep(5)
         return
