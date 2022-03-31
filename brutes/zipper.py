@@ -4,7 +4,7 @@ from zipfile import ZipFile
 def start():
     filepath = input('Zipfile: ')
     extract_location = input('where would you like to extract this to?')
-    
+    # TODO get the file list and try each password in the list 
 
 
 def attempt_to_unzip(filepath:str, password: str, extract_location: str):
