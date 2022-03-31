@@ -1,30 +1,21 @@
-from time import sleep
 from zipfile import ZipFile
-
-from colors import print_fail, print_info, print_success
 
 
 def start():
-    path = input('Zipfile Location: ')
-    f = open('passlist', 'r')
-    passwords = f.readlines()
-    f.close()
-    for password in passwords:
-        unziped = unzip(path, password.rstrip())
-        if unziped:
-            print_success(f'[~] SUCCESSFULLY FOUND PASSWORD {password}')
-            sleep(5)
-            return
-    print_fail('[!] Unable to find password')
-    sleep(5)
+    filepath = input('Zipfile: ')
+    extract_location = input('where would you like to extract this to?')
+    
 
 
-def unzip(filepath: str, password: str):
+def attempt_to_unzip(filepath:str, password: str, extract_location: str):
     try:
-      with ZipFile(filepath) as zf:
-          print_info(f'Attempting unzip -> {password}')
-          zf.extractall(f'./{filepath.removesuffix(".zip")}', members=zf.filelist, pwd=bytes(password, 'utf-8'))
-          zf.close()
-          return True
+        with ZipFile(filepath) as f:
+            f.extractall(extract_location, f.filelist, bytes('password', 'utf-8'))
+            f.close()
+            print(f'Successfully extracted with password {password}')
+            exit(1)
     except: 
-      return False
+        return False
+
+
+start()
