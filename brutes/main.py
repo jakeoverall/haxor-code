@@ -2,6 +2,7 @@ import os
 
 import password_checker
 import ssh_attacker
+import zipper
 from colors import colors
 
 # Creates the Menu the user interacts with
@@ -9,6 +10,7 @@ from colors import colors
 options = {
   '1': password_checker.start,
   '2': ssh_attacker.start,
+  '3': zipper.start,
   'q': quit,
   'Q': quit
 }
@@ -19,6 +21,7 @@ Please Select an option
 
 {colors.GREEN}1 - Check Password
 {colors.BLUE}2 - SSH Brute Login
+{colors.WARNING}3 - Zip Brute
 {colors.FAIL}Q - Quit{colors.ENDC}
 """)
   choice = input("> ")
